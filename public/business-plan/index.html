@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Business Plan Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Business Plan Generator</h1>
+        <p class="muted">Pitch-deck style • A4 • Server-generated PDF</p>
+      </div>
+      <button id="btnExport" class="btn primary">Export to PDF</button>
+    </header>
+
+    <section class="card">
+      <h2>Branding</h2>
+      <div class="grid">
+        <div>
+          <label>Primary Color</label>
+          <input type="color" id="primaryColor" value="#0b1220" />
+        </div>
+        <div>
+          <label>Accent Color</label>
+          <input type="color" id="accentColor" value="#22c55e" />
+        </div>
+        <div>
+          <label>Logo (PNG/JPG)</label>
+          <input type="file" id="logoFile" accept="image/png,image/jpeg" />
+        </div>
+        <div>
+          <label>Business Photos (optional)</label>
+          <input type="file" id="photoFiles" accept="image/png,image/jpeg" multiple />
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Business Info</h2>
+      <div class="grid">
+        <div>
+          <label>Business Name</label>
+          <input id="bizName" placeholder="e.g., Acme Foods Ltd" />
+        </div>
+        <div>
+          <label>Tagline</label>
+          <input id="tagline" placeholder="e.g., Fresh meals, faster delivery" />
+        </div>
+        <div>
+          <label>Business Model</label>
+          <input id="bizModel" placeholder="e.g., B2C subscription + retail" />
+        </div>
+        <div>
+          <label>Pricing</label>
+          <input id="pricing" placeholder="e.g., ₦5,000 per weekly plan" />
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Sections (Default business plan content)</h2>
+      <label>Executive Summary</label>
+      <textarea id="execSummary" rows="4"></textarea>
+
+      <div class="grid2">
+        <div>
+          <label>Problem Points (one per line)</label>
+          <textarea id="problemPoints" rows="5"></textarea>
+        </div>
+        <div>
+          <label>Solution Points (one per line)</label>
+          <textarea id="solutionPoints" rows="5"></textarea>
+        </div>
+      </div>
+
+      <label>Products & Services (overview)</label>
+      <textarea id="productsText" rows="4"></textarea>
+
+      <label>Market Summary</label>
+      <textarea id="marketSummary" rows="4"></textarea>
+
+      <label>Sales Strategy</label>
+      <textarea id="salesStrategy" rows="4"></textarea>
+
+      <label>Operations</label>
+      <textarea id="operationsText" rows="4"></textarea>
+
+      <label>Team</label>
+      <textarea id="teamText" rows="4"></textarea>
+    </section>
+
+    <section class="card">
+      <h2>Market Details</h2>
+      <div class="grid">
+        <div>
+          <label>Target Customers</label>
+          <input id="targetCustomers" placeholder="e.g., SMEs in Abuja" />
+        </div>
+        <div>
+          <label>Primary Market</label>
+          <input id="primaryMarket" placeholder="e.g., Abuja + Lagos" />
+        </div>
+        <div>
+          <label>Go-to-Market</label>
+          <input id="gtm" placeholder="e.g., Instagram + referrals + partnerships" />
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div>
+          <label>Marketing Channels (one per line)</label>
+          <textarea id="channels" rows="5"></textarea>
+        </div>
+        <div>
+          <label>Competitors (one per line)</label>
+          <textarea id="competitors" rows="5"></textarea>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div>
+          <label>TAM (₦)</label>
+          <input id="tam" type="number" value="300000000" />
+        </div>
+        <div>
+          <label>SAM (₦)</label>
+          <input id="sam" type="number" value="120000000" />
+        </div>
+        <div>
+          <label>SOM (₦)</label>
+          <input id="som" type="number" value="30000000" />
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Financials (1 Year Monthly)</h2>
+      <p class="muted">Enter 12 values for each (comma-separated). Example: 10000,12000,...</p>
+
+      <div class="grid2">
+        <div>
+          <label>Monthly Revenue (₦)</label>
+          <textarea id="rev12" rows="3">200000,220000,250000,280000,300000,320000,350000,380000,420000,450000,480000,520000</textarea>
+        </div>
+        <div>
+          <label>Monthly Expenses (₦)</label>
+          <textarea id="exp12" rows="3">150000,155000,160000,165000,170000,175000,180000,190000,200000,210000,220000,235000</textarea>
+        </div>
+      </div>
+
+      <label>Assumptions (one per line)</label>
+      <textarea id="assumptions" rows="4"></textarea>
+
+      <div class="grid3">
+        <div>
+          <label>Breakeven Revenue (₦)</label>
+          <input id="breakeven" type="number" value="250000" />
+        </div>
+        <div>
+          <label>Operations Resources</label>
+          <input id="resources" placeholder="e.g., Kitchen, dispatch riders, POS" />
+        </div>
+        <div>
+          <label>Partners</label>
+          <input id="partners" placeholder="e.g., suppliers, logistics partners" />
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Tables</h2>
+
+      <h3>Products List</h3>
+      <div class="muted small">Add rows, then export.</div>
+      <div id="productsTable"></div>
+      <button class="btn" id="addProduct">+ Add Product</button>
+
+      <hr />
+
+      <h3>Competitor Comparison</h3>
+      <div id="competitorTable"></div>
+      <button class="btn" id="addCompetitor">+ Add Competitor</button>
+
+      <hr />
+
+      <h3>Team Members</h3>
+      <div id="teamTable"></div>
+      <button class="btn" id="addTeam">+ Add Member</button>
+
+      <hr />
+
+      <h3>Milestones (12 months)</h3>
+      <div id="milestoneTable"></div>
+      <button class="btn" id="addMilestone">+ Add Milestone</button>
+
+      <hr />
+
+      <h3>Risks</h3>
+      <div id="riskTable"></div>
+      <button class="btn" id="addRisk">+ Add Risk</button>
+    </section>
+
+    <section class="card">
+      <h2>Generated Infographics Preview</h2>
+      <div class="charts">
+        <canvas id="chartRevenue"></canvas>
+        <canvas id="chartCashflow"></canvas>
+        <canvas id="chartExpenses"></canvas>
+        <canvas id="chartBreakeven"></canvas>
+        <canvas id="chartTamsamsom"></canvas>
+        <canvas id="chartTimeline"></canvas>
+        <canvas id="chartOrg"></canvas>
+        <canvas id="chartFunnel"></canvas>
+      </div>
+      <button id="btnRefreshCharts" class="btn">Refresh Charts</button>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

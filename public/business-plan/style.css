@@ -1,0 +1,131 @@
+:root{
+  --bg:#0b1220;
+  --card:#0f172a;
+  --text:#0b1220;
+  --muted:#6b7280;
+  --white:#ffffff;
+  --line:#e5e7eb;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:#f6f7fb;
+  color:#111827;
+}
+.wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:18px;
+}
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+}
+h1{margin:0;font-size:20px}
+.muted{color:var(--muted); margin:4px 0 0}
+.small{font-size:12px}
+
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:12px;
+  box-shadow:0 6px 18px rgba(17,24,39,0.05);
+}
+.card h2{margin:0 0 10px;font-size:15px}
+.card h3{margin:12px 0 8px;font-size:13px}
+label{display:block;font-size:12px;color:#374151;margin:8px 0 6px}
+input, textarea{
+  width:100%;
+  padding:10px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  outline:none;
+  font-size:13px;
+}
+textarea{resize:vertical}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:10px;
+}
+.grid2{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:10px;
+}
+.grid3{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:10px;
+}
+@media (max-width: 900px){
+  .grid{grid-template-columns: 1fr 1fr}
+}
+@media (max-width: 640px){
+  .grid,.grid2,.grid3{grid-template-columns:1fr}
+  .top{flex-direction:column; align-items:flex-start}
+}
+
+.btn{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn.primary{
+  background:#111827;
+  border-color:#111827;
+  color:#fff;
+}
+hr{
+  border:none;
+  border-top:1px solid var(--line);
+  margin:14px 0;
+}
+.charts{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:10px;
+}
+canvas{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:8px;
+}
+
+.alert{
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#9a3412;
+  padding:12px;
+  border-radius:12px;
+  margin-bottom:12px;
+}
+.alert ul{ margin:6px 0 0; padding-left:18px; }
+
+.form-input {
+    @apply w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all;
+    color-scheme: dark;  /* ← tells browser to use dark native controls */
+}
+
+select.form-input option {
+    background-color: #1e293b;  /* ← already exists, but make sure it's there */
+    color: #ffffff;
+}
+
+input.form-input,
+textarea.form-input {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
